@@ -16,9 +16,14 @@ import org.springframework.web.server.ResponseStatusException;
 //import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.*;  // replaces all above
 import com.seis739.contentcalendar.Repository.ContentCollectionRepository;
+import com.seis739.contentcalendar.Repository.ContentRepository;
 import com.seis739.contentcalendar.model.Content;
+import com.seis739.contentcalendar.model.Status;
 
 import jakarta.validation.Valid;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
 
 // Create an instance of this controller and put it in the ApplicationContext
 @RestController
@@ -28,10 +33,11 @@ import jakarta.validation.Valid;
 public class ContentController {
 
     // Final because we will only mess with it once?
-    private final ContentCollectionRepository repository;
+    // private final ContentCollectionRepository repository;
+    private final ContentRepository repository;
 
     // Dependency injection via param because @Repository
-    public ContentController(ContentCollectionRepository repository){
+    public ContentController(ContentRepository repository){
         this.repository = repository;
     }
 
@@ -73,6 +79,20 @@ public class ContentController {
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @DeleteMapping(path = "/{id}")
     public void delete(@PathVariable Integer id){
-        repository.delete(id);
+        //repository.delete(id);
+        repository.deleteById(id);
     }
+
+    // Gets posts by keyword (see data extras on p.17)
+    @GetMapping(path = "/filter/{keyword}")
+    public List<Content> findByTitle(@PathVariable String keyword) {
+        return repository.findAllByTitleContains(keyword);
+    }
+
+    // Gets all content items that have a particular status (see data extras on p.17-18)
+    @GetMapping(path="/filter/status/{status}")
+    public List<Content> findByStatus(@PathVariable Status status){
+        return repository.listByStatus(status);
+    }
+    
 }

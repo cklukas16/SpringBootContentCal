@@ -1,10 +1,18 @@
 package com.seis739.contentcalendar;
 
+import java.time.LocalDateTime;
 import java.util.Arrays;
 
+import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
+import org.springframework.context.annotation.Bean;
+
+import com.seis739.contentcalendar.Repository.ContentRepository;
+import com.seis739.contentcalendar.model.Content;
+import com.seis739.contentcalendar.model.Status;
+import com.seis739.contentcalendar.model.Type;
 
 // Requried for main class
 @SpringBootApplication
@@ -22,4 +30,23 @@ public class ContentCalendarApplication {
 		// Arrays.stream(context.getBeanDefinitionNames()).forEach(System.out::println);
 	}
 
+	@Bean
+	CommandLineRunner commandLineRunner(ContentRepository repository){
+		//return args -> System.out.println("The commandLineRunner is executed!");
+		
+		return args -> {
+			// insert some data into the database
+
+			Content content = new Content(null, 
+        	  	"CommandLineRunner", 
+        	    "Inserting data using CommandLineRunner.", 
+            	Status.IDEA,
+            	Type.VIDEO, 
+            	LocalDateTime.now(), 
+        	    null, 
+        	    "");
+
+		repository.save(content);
+		};
+	}
 }
