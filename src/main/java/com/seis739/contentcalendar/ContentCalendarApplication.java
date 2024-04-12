@@ -30,23 +30,25 @@ public class ContentCalendarApplication {
 		// Arrays.stream(context.getBeanDefinitionNames()).forEach(System.out::println);
 	}
 
-	@Bean
-	CommandLineRunner commandLineRunner(ContentRepository repository){
-		//return args -> System.out.println("The commandLineRunner is executed!");
+	// ****************************************
+	// *****Data Loading***********************
+	// @Bean
+	// CommandLineRunner commandLineRunner(ContentRepository repository){
+	// 	//return args -> System.out.println("The commandLineRunner is executed!");
 		
-		return args -> {
-			// insert some data into the database
+	// 	return args -> {
+	// 		// insert some data into the database
 
-			Content content = new Content(null, 
-        	  	"CommandLineRunner", 
-        	    "Inserting data using CommandLineRunner.", 
-            	Status.IDEA,
-            	Type.VIDEO, 
-            	LocalDateTime.now(), 
-        	    null, 
-        	    "");
+	// 		Content content = new Content(null, 
+    //     	  	"CommandLineRunner", 
+    //     	    "Inserting data using CommandLineRunner.", 
+    //         	Status.IDEA,
+    //         	Type.VIDEO, 
+    //         	LocalDateTime.now(), 
+    //     	    null, 
+    //     	    "");
 
-		repository.save(content);
-		};
-	}
+	// 	repository.save(content);
+	// 	};
+	// }
 }
