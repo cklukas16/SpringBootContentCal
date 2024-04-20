@@ -35,7 +35,7 @@ public class DataLoader implements CommandLineRunner {
         // getResourceAsStream finds a resouce with a given name.
         try(InputStream inputStream = TypeReference.class.getResourceAsStream("/data/content.json")){
             // objectMapper reads json fron inputStream and creates a type from each item
-            // TypeReference is an abstract class that gives a reference of the data dype you want after
+            // TypeReference is an abstract class that gives a reference of the data type you want after
             // json parsing is complete. 
             repository.saveAll(objectMapper.readValue(inputStream, new TypeReference<List<Content>>(){}));
         }
