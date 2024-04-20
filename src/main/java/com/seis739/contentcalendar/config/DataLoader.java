@@ -4,6 +4,7 @@ import java.io.InputStream;
 import java.util.List;
 
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
 
 import com.fasterxml.jackson.core.type.TypeReference;
@@ -11,6 +12,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.seis739.contentcalendar.Repository.ContentRepository;
 import com.seis739.contentcalendar.model.Content;
 
+//@Profile("!dev")   // don't run this file in the dev profile (see application.properties)
 @Component   // comment out @Component if you don't want this to run.
 public class DataLoader implements CommandLineRunner {
 
